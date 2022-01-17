@@ -6,11 +6,15 @@ pipeline {
               reuseNode true
         }
     }
+    environment {
+        VERSION = "${env.VERSION}"
+    }
     stages {
         stage ('first') {
             steps {
                 sh 'python3 --version'
                 sh '/tmp/get_info.sh'
+
             }
         }
 		    stage ('Build') {
@@ -32,7 +36,7 @@ pipeline {
                               "files": [
                                  {
                                   "pattern": "$WORKSPACE/zip/*.zip",
-                                  "target": "binary-storage/"
+                                  "target": "binary-storage/"+VERSION
                                 }
                              ]
                         }'''
