@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-LABEL agent="zip-job-docker"
+LABEL node="zip-job-docker"
 ENV VERSION=1.2.0
 RUN apt-get update && apt-get install -y \
     python3 \
