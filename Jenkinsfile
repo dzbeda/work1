@@ -2,12 +2,12 @@ pipeline {
     agent {
         dockerfile {
               args '--privileged -v $WORKSPACE/zip:/zip -u root'
-              //label 'zip-job-docker'
+              label 'zip-job-docker'
               reuseNode true
         }
     }
     environment {
-        VERSION = "${env.VERSION}"
+        DUDU = "${env.VERSION}"
     }
     stages {
         stage ('first') {
@@ -30,13 +30,14 @@ pipeline {
 		    stage ('Publish') {
 			      steps {
 				        sh 'printenv'
+                echo ${DUDU}
                 rtUpload (
 					             serverId: 'jfrog1',
 					             spec: '''{
                               "files": [
                                  {
                                   "pattern": "$WORKSPACE/zip/*.zip",
-                                  "target": "binary-storage/"+ENV.VERSION
+                                  "target": "binary-storage/"+${DUDU}
                                 }
                              ]
                         }'''
