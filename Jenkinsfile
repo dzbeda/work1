@@ -6,9 +6,6 @@ pipeline {
               reuseNode true
         }
     }
-    environment {
-        DUDU = "${env.VERSION}"
-    }
     stages {
         stage ('first') {
             steps {
@@ -29,15 +26,13 @@ pipeline {
 		    }
 		    stage ('Publish') {
 			      steps {
-				        sh 'printenv'
-                echo ${DUDU}
                 rtUpload (
 					             serverId: 'jfrog1',
 					             spec: '''{
                               "files": [
                                  {
                                   "pattern": "$WORKSPACE/zip/*.zip",
-                                  "target": "binary-storage/"+${DUDU}
+                                  "target": "binary-storage/"
                                 }
                              ]
                         }'''
