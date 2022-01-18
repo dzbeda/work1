@@ -24,9 +24,16 @@ pipeline {
 		    stage ('Show Log File') {
 			      steps {
                 sh 'cat /tmp/output.log'
+                sh 'echo $VERSION >> $WORKSPACE/version.txt '
             }
 		    }
 		    stage ('Publish') {
+          environment {
+              FOLDER= """${sh(
+              returnStdout: true,
+              script: 'cat $WORKSPACE/version.txt'
+              )}"""
+          } 
             // environment {
             //   FOLDER= """${sh(
             //     returnStdout: true,
@@ -34,13 +41,6 @@ pipeline {
             // )}"""
             // }
 			      steps {
-                    sh 'echo $VERSION >> $WORKSPACE/version.txt '
-                    environment {
-                        FOLDER= """${sh(
-                        returnStdout: true,
-                        script: 'cat $WORKSPACE/version.txt'
-                        )}"""
-                    }
                     rtUpload (
     					             serverId: 'jfrog1',
     					             spec: '''{
