@@ -29,7 +29,7 @@ pipeline {
 		    }
 		    stage ('Publish') {
           environment {
-               FOLDER= """${sh(script: 'echo $VERSION')}"""
+               FOLDER= """${sh(returnStdout: true,script: 'echo $VERSION')}"""
           }
             // environment {
             //   FOLDER= """${sh(
@@ -44,7 +44,7 @@ pipeline {
                                   "files": [
                                      {
                                       "pattern": "$WORKSPACE/zip/*.zip",
-                                      "target":  "binary-storage/${FOLDER}"
+                                      "target":  "binary-storage/${FOLDER} "
                                     }
                                  ]
                             }'''
