@@ -47,7 +47,7 @@ pipeline {
                                   "files": [
                                      {
                                       "pattern": "$WORKSPACE/zip/*.zip",
-                                      "target":  "binary-storage/1.2.0/"
+                                      "target":  "binary-storage/${FOLDER}"
                                     }
                                  ]
                             }'''
