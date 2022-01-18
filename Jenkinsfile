@@ -27,12 +27,12 @@ pipeline {
             }
 		    }
 		    stage ('Publish') {
-            environment {
-              FOLDER= """${sh(
-                returnStdout: true,
-                script: 'echo $VERSION > $workspace/version.txt'
-            )}"""
-            }
+            // environment {
+            //   FOLDER= """${sh(
+            //     returnStdout: true,
+            //     script: 'echo $VERSION > $workspace/version.txt'
+            // )}"""
+            // }
 			      steps {
                     sh 'printenv'
                     rtUpload (
@@ -41,7 +41,7 @@ pipeline {
                                   "files": [
                                      {
                                       "pattern": "$WORKSPACE/zip/*.zip",
-                                      "target":  "binary-storage/${FOLDER}"
+                                      "target":  "binary-storage/"
                                     }
                                  ]
                             }'''
