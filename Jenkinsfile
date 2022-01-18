@@ -3,7 +3,7 @@ pipeline {
         dockerfile {
               args '--privileged -v $WORKSPACE/zip:/zip -u root'
               reuseNode true
-              label 'zip-job-docker'
+              //label 'zip-job-docker'
         }
     }
     stages {
