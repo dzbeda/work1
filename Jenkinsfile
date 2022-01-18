@@ -27,6 +27,9 @@ pipeline {
             }
 		    }
 		    stage ('Publish') {
+            environment {
+              FOLDER= ''' cat /zip/version.txt '''
+            }
 			      steps {
                 script {
                     sh 'printenv'
@@ -36,7 +39,7 @@ pipeline {
                                   "files": [
                                      {
                                       "pattern": "$WORKSPACE/zip/*.zip",
-                                      "target":  "binary-storage/dudu/"
+                                      "target":  "binary-storage/${FOLDER}"
                                     }
                                  ]
                             }'''
