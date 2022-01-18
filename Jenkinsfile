@@ -24,7 +24,7 @@ pipeline {
 		    stage ('Show Log File') {
 			      steps {
                 sh 'cat /tmp/output.log'
-                sh 'echo $VERSION >> $WORKSPACE/version.txt '
+                sh 'echo $VERSION > $WORKSPACE/version.txt '
             }
 		    }
 		    stage ('Publish') {
