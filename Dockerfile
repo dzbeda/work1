@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 LABEL node="zip-job-docker"
-ENV VERSION=1.2.0
+ENV VERSION=AAA
 RUN apt-get update && apt-get install -y \
     python3 \
     zip \
