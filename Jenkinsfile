@@ -48,7 +48,7 @@ pipeline {
     post {
         always {
             cleanWs()
-            step([$class: 'Mailer', notifyEveryUnstableBuild: True, recipients: 'dudu.confirm@gmail.com', sendToIndividuals: true])
+            step(emailext attachLog: true, body: 'message', subject: 'hi', to: 'dudu.confirm@gmail.com')
         }
     }
 }
