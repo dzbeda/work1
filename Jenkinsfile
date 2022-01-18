@@ -30,11 +30,10 @@ pipeline {
             environment {
               FOLDER= """${sh(
                 returnStdout: true,
-                script: 'cat $WORKSPACE/zip/version2.txt'
+                script: 'echo $VERSION > $workspace/version.txt'
             )}"""
             }
 			      steps {
-                script {
                     sh 'printenv'
                     rtUpload (
     					             serverId: 'jfrog1',
@@ -47,7 +46,6 @@ pipeline {
                                  ]
                             }'''
     				         )
-                 }
             }
 		     }
     }
