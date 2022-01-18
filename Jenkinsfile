@@ -2,7 +2,7 @@ pipeline {
     agent {
         dockerfile {
               args '--privileged -v $WORKSPACE/zip:/zip -u root'
-              label 'zip-job-docker'
+              //label 'zip-job-docker'
               reuseNode true
         }
     }
@@ -28,17 +28,21 @@ pipeline {
 		    }
 		    stage ('Publish') {
 			      steps {
-                rtUpload (
-					             serverId: 'jfrog1',
-					             spec: '''{
-                              "files": [
-                                 {
-                                  "pattern": "$WORKSPACE/zip/*.zip",
-                                  "target": "binary-storage/"
-                                }
-                             ]
-                        }'''
-				         )
+                script {
+                    sh 'printenv'
+                    env.DUDU = "${env.VERSION}"
+                    rtUpload (
+    					             serverId: 'jfrog1',
+    					             spec: '''{
+                                  "files": [
+                                     {
+                                      "pattern": "$WORKSPACE/zip/*.zip",
+                                      "target": "binary-storage/" + ${env.DUDU} + "/"
+                                    }
+                                 ]
+                            }'''
+    				         )
+                 }
             }
 		     }
     }
