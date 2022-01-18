@@ -46,9 +46,14 @@ pipeline {
 		     }
     }
     post {
-        always {
+         success {
+           emailext(attachLog: true, body: 'Pleaee find attached log', subject: 'Job passed successfully', to: 'dudu.confirm@gmail.com')
+         }
+         failure  {
+           emailext(attachLog: true, body: 'Pleaee find attached log', subject: 'Job failed to run', to: 'dudu.confirm@gmail.com')
+         }
+         always {
             cleanWs()
-            emailext(attachLog: true, body: 'message', subject: 'hi', to: 'dudu.confirm@gmail.com')
         }
     }
 }
