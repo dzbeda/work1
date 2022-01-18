@@ -33,7 +33,7 @@ pipeline {
               returnStdout: true,
               script: 'cat $WORKSPACE/version.txt'
               )}"""
-          } 
+          }
             // environment {
             //   FOLDER= """${sh(
             //     returnStdout: true,
@@ -47,7 +47,7 @@ pipeline {
                                   "files": [
                                      {
                                       "pattern": "$WORKSPACE/zip/*.zip",
-                                      "target":  "binary-storage/"
+                                      "target":  "binary-storage/${FOLDER}"
                                     }
                                  ]
                             }'''
