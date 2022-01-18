@@ -24,12 +24,12 @@ pipeline {
 		    stage ('Show Log File') {
 			      steps {
                 sh 'cat /tmp/output.log'
-                sh 'echo $VERSION/ > $WORKSPACE/version.txt '
+                //sh 'echo $VERSION/ > $WORKSPACE/version.txt '
             }
 		    }
 		    stage ('Publish') {
           environment {
-               FOLDER= """${sh(script: 'echo $VERSION/')}"""
+               FOLDER= """${sh(script: 'echo $VERSION')}"""
           }
             // environment {
             //   FOLDER= """${sh(
