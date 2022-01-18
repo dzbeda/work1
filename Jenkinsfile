@@ -29,7 +29,7 @@ pipeline {
 		    }
 		    stage ('Publish') {
           environment {
-               FOLDER= sh(returnStdout: true,script: 'echo $VERSION')
+               FOLDER= "sh(returnStdout: true,script: 'echo $VERSION')"
           }
             // environment {
             //   FOLDER= """${sh(
