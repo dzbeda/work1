@@ -28,12 +28,12 @@ pipeline {
             }
 		    }
 		    stage ('Publish') {
-          // environment {
-          //     // FOLDER= """${sh(
-          //     // returnStdout: true,
-          //     // script: 'cat $WORKSPACE/version.txt'
-          //     // )}"""
-          // }
+          environment {
+               FOLDER= """${sh(
+               returnStdout: true,
+               script: 'cat $WORKSPACE/version.txt'
+               )}"""
+          }
             // environment {
             //   FOLDER= """${sh(
             //     returnStdout: true,
@@ -41,8 +41,6 @@ pipeline {
             // )}"""
             // }
 			      steps {
-              script {
-                    FOLDER= $sh(cat $WORKSPACE/version.txt)
                     rtUpload (
     					             serverId: 'jfrog1',
     					             spec: '''{
@@ -54,7 +52,6 @@ pipeline {
                                  ]
                             }'''
     				         )
-              }
             }
 		     }
     }
