@@ -34,7 +34,7 @@ pipeline {
             // )}"""
             // }
 			      steps {
-                    sh 'echo $VERSION'
+                    sh 'echo $VERSION >> $WORKSPACE/version.txt '
                     rtUpload (
     					             serverId: 'jfrog1',
     					             spec: '''{
