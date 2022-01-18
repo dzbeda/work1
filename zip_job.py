@@ -42,7 +42,7 @@ files = {'a','b','c','d'}
 file_extension= '.txt'
 file_path='/tmp/'  #define the path were txt files will be created
 version=os.getenv('VERSION')
-zip_file_path= '/zip/'+version+'/'   #define the path were zip files will be created
+zip_file_path= '/zip/'   #define the path were zip files will be created
 
 
                                                         ## Start program ##
