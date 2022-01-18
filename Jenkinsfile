@@ -30,7 +30,7 @@ pipeline {
 			      steps {
                 script {
                     sh 'printenv'
-                    env.DUDU = "${env.VERSION}"
+                    env.DUDU = ${env.VERSION}
                     rtUpload (
     					             serverId: 'jfrog1',
     					             spec: '''{
