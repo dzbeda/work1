@@ -29,9 +29,7 @@ pipeline {
 		    }
 		    stage ('Publish') {
           environment {
-               FOLDER= """${sh(
-               returnStdout: true,
-               script: 'cat $WORKSPACE/version.txt')}"""
+               FOLDER= """${sh(returnStdout: true,script: 'grep -v -e '^$' $WORKSPACE/version.txt')}"""
           }
             // environment {
             //   FOLDER= """${sh(
