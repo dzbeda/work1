@@ -24,19 +24,12 @@ pipeline {
 		    stage ('Show Log File') {
 			      steps {
                 sh 'cat /tmp/output.log'
-                //sh 'echo $VERSION/ > $WORKSPACE/version.txt '
             }
 		    }
 		    stage ('Publish') {
-          environment {
-               FOLDER= "sh(returnStdout: true,script: 'echo $VERSION')"
-          }
-            // environment {
-            //   FOLDER= """${sh(
-            //     returnStdout: true,
-            //     script: 'echo $VERSION > $workspace/version.txt'
-            // )}"""
-            // }
+          // environment {
+          //      FOLDER= sh(returnStdout: true,script: 'echo $VERSION')
+          // }
 			      steps {
                     rtUpload (
     					             serverId: 'jfrog1',
@@ -44,12 +37,18 @@ pipeline {
                                   "files": [
                                      {
                                       "pattern": "$WORKSPACE/zip/*.zip",
-                                      "target":  "${FOLDER}"
+                                      "target":  "binary-storage/"
                                     }
                                  ]
                             }'''
     				         )
             }
 		     }
+    }
+    post {
+        always {
+            cleanWs()
+            step([$class: 'Mailer', notifyEveryUnstableBuild: false, recipients: 'dudu.confirm@gmail.com', sendToIndividuals: true])
+        }
     }
 }
