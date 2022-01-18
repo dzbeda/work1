@@ -29,7 +29,7 @@ pipeline {
 		    }
 		    stage ('Publish') {
           environment {
-               FOLDER= """${sh(returnStdout: true,script: "cat version.txt | sed '/^ $/d'")}"""
+               FOLDER= ${sh(returnStdout: true,script: "cat version.txt | sed '/^ $/d'")}
           }
             // environment {
             //   FOLDER= """${sh(
