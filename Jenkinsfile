@@ -37,7 +37,7 @@ pipeline {
                                   "files": [
                                      {
                                       "pattern": "$WORKSPACE/zip/*.zip",
-                                      "target":  "${env.ENV_DUDU}"
+                                      "target":  "binary-storage/${env.ENV_DUDU}"
                                     }
                                  ]
                             }'''
