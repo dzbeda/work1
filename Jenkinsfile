@@ -27,7 +27,6 @@ pipeline {
             }
 		    }
 		    stage ('Publish') {
-            sh 'echo $VERSION'
             // environment {
             //   FOLDER= """${sh(
             //     returnStdout: true,
@@ -35,7 +34,7 @@ pipeline {
             // )}"""
             // }
 			      steps {
-                    sh 'printenv'
+                    sh 'echo $VERSION'
                     rtUpload (
     					             serverId: 'jfrog1',
     					             spec: '''{
