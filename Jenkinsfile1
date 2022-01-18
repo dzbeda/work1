@@ -1,0 +1,8 @@
+node ('zip2') {
+  docker.dockerfile().inside('--privileged -v $WORKSPACE/zip:/zip -u root') {
+
+      stage('Test') {
+          echo "hello"
+      }
+   }
+}
