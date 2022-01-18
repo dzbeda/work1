@@ -11,7 +11,7 @@ pipeline {
             steps {
                 sh 'python3 --version'
                 sh '/tmp/get_info.sh'
-                sh "pwd"
+                sh 'echo $(pwd)'
 
             }
         }
