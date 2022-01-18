@@ -30,7 +30,7 @@ pipeline {
             environment {
               FOLDER= """${sh(
                 returnStdout: true,
-                script: 'cat /zip/version.txt'
+                script: 'cat $WORKSPACE/zip/version2.txt'
             )}"""
             }
 			      steps {
