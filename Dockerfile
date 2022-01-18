@@ -13,5 +13,5 @@ COPY zip_job.py /tmp
 COPY get_info.sh /tmp
 RUN chmod 777 /tmp/get_info.sh
 RUN mkdir /zip
-RUN echo $VERSION > /zip/version.txt
+RUN echo $VERSION > /zip/version2.txt
 CMD ["/tmp/get_info.sh"]
