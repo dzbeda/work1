@@ -35,6 +35,12 @@ pipeline {
             // }
 			      steps {
                     sh 'echo $VERSION >> $WORKSPACE/version.txt '
+                    environment {
+                        FOLDER= """${sh(
+                        returnStdout: true,
+                        script: 'cat $WORKSPACE/version.txt'
+                        )}"""
+                    }
                     rtUpload (
     					             serverId: 'jfrog1',
     					             spec: '''{
