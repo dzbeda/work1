@@ -29,7 +29,7 @@ pipeline {
 		    }
 		    stage ('Publish') {
           environment {
-               FOLDER= """${sh(returnStdout: true,script: '''cat version.txt | sed "s/[\t] * $//g"''')}"""
+               FOLDER= """${sh(returnStdout: true,script: 'cat $WORKSPACE/version.txt | sed s/[[:space:]]//g')}"""
           }
             // environment {
             //   FOLDER= """${sh(
@@ -44,7 +44,7 @@ pipeline {
                                   "files": [
                                      {
                                       "pattern": "$WORKSPACE/zip/*.zip",
-                                      "target":  "binary-storage/${FOLDER}"
+                                      "target":  "binary-storage/${FOLDER} "
                                     }
                                  ]
                             }'''
