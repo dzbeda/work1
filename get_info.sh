@@ -5,7 +5,7 @@ echo "OS-type= "$(cat /etc/os-release | sed -n 's/PRETTY_NAME=//p')
 echo "architecture= "$(uname -m)
 if [ -f "$locate_file" ];
   then
-      echo $locate_file "File exists"
+      echo "Python script exists under " $locate_file
   else
-      echo $locate_file "File can not be found"
+      echo "Python script can not be found under " $locate_file 
 fi

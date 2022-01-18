@@ -1,6 +1,5 @@
 This folder include all the requirmnets in order to install jfrog artifactory-oss server
 1. Install docker compose on the host server
 2. Copy the docker-compose.yml file to the host server
-TODO - Update the configurtion
 3. Run "docker-compose up"
 4. Browse to the jfrog artifactory-oss UI ; http://<docker-host-server-ip>:8081

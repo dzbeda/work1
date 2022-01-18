@@ -2,18 +2,13 @@ pipeline {
     agent {
         dockerfile {
               args '--privileged -v $WORKSPACE/zip:/zip -u root'
-              //label 'zip-job-docker'
               reuseNode true
         }
     }
     stages {
         stage ('first') {
             steps {
-                sh 'python3 --version'
                 sh '/tmp/get_info.sh'
-                sh 'echo $(hostname)'
-                sh 'hostname'
-
             }
         }
 		    stage ('Build') {
