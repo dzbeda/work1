@@ -28,7 +28,10 @@ pipeline {
 		    }
 		    stage ('Publish') {
             environment {
-              FOLDER= ''' cat /zip/version.txt '''
+              FOLDER= """${sh(
+                returnStdout: true,
+                script: 'cat /zip/version.txt'
+            )}"""
             }
 			      steps {
                 script {
