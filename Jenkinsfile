@@ -23,7 +23,6 @@ pipeline {
 		}
 		stage ('Publish') {
 			steps {
-				sh 'printenv'
                 rtUpload (
 					serverId: 'jfrog1',
 					spec: '''{
