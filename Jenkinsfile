@@ -27,6 +27,7 @@ pipeline {
             }
 		    }
 		    stage ('Publish') {
+            sh 'echo $VERSION'
             // environment {
             //   FOLDER= """${sh(
             //     returnStdout: true,
