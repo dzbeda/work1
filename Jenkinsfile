@@ -1,35 +1,32 @@
 pipeline {
     agent {
         dockerfile {
-              args '--privileged -v $WORKSPACE/zip:/zip -u root'
-              reuseNode true
-              //label 'zip-job-docker'
-        }
+            args '--privileged -v $WORKSPACE/zip:/zip -u root'
+            }
     }
     stages {
         stage ('first') {
             steps {
                 sh 'python3 --version'
                 sh '/tmp/get_info.sh'
-                sh 'echo $(pwd)'
-
             }
         }
-		    stage ('Build') {
-			      steps {
+		stage ('Build') {
+			steps {
                 sh 'python3 /tmp/zip_job.py'
             }
-		    }
-		    stage ('Show Log File') {
-			      steps {
+		}
+		stage ('Show Log File') {
+			steps {
                 sh 'cat /tmp/output.log'
             }
-		    }
-		    stage ('Publish') {
-			      steps {
+		}
+		stage ('Publish') {
+			steps {
+				sh 'printenv'
                 rtUpload (
-					             serverId: 'jfrog1',
-					             spec: '''{
+					serverId: 'jfrog1',
+					spec: '''{
                               "files": [
                                  {
                                   "pattern": "$WORKSPACE/zip/*.zip",
@@ -37,8 +34,8 @@ pipeline {
                                 }
                              ]
                         }'''
-				         )
+				)
             }
-		     }
+		}
     }
 }
