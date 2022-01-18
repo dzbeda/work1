@@ -24,7 +24,7 @@ pipeline {
 		    stage ('Show Log File') {
 			      steps {
                 sh 'cat /tmp/output.log'
-                sh 'echo $VERSION > $WORKSPACE/version.txt '
+                sh 'echo $VERSION/ > $WORKSPACE/version.txt '
             }
 		    }
 		    stage ('Publish') {
@@ -33,7 +33,6 @@ pipeline {
               returnStdout: true,
               script: 'cat $WORKSPACE/version.txt'
               )}"""
-              TARGET='binary-storage/${FOLDER}/'
           }
             // environment {
             //   FOLDER= """${sh(
@@ -48,7 +47,7 @@ pipeline {
                                   "files": [
                                      {
                                       "pattern": "$WORKSPACE/zip/*.zip",
-                                      "target":  "${TARGET}"
+                                      "target":  "binary-storage/${FOLDER}
                                     }
                                  ]
                             }'''
