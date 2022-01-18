@@ -30,14 +30,14 @@ pipeline {
 			      steps {
                 script {
                     sh 'printenv'
-                    env.DUDU = '${env.VERSION}'
+                    ENV_DUDU = 'whatt'
                     rtUpload (
     					             serverId: 'jfrog1',
     					             spec: '''{
                                   "files": [
                                      {
                                       "pattern": "$WORKSPACE/zip/*.zip",
-                                      "target":  $env.DUDU
+                                      "target":  "${env.ENV_DUDU}"
                                     }
                                  ]
                             }'''
