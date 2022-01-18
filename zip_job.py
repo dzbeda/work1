@@ -10,7 +10,7 @@ def create_file(full_file_name):
     with open(full_file_name,'w+') as f:
     #time.sleep(20)  #Using sleep will give you the option to delete the file manually in order to check the if statment in case the file was not created
         if os.path.exists(full_file_name) == True:
-            print(full_file_name+" File exists")
+            print("Created filename: " + filename + file_extension + " under " + file_path)
             logging.info("Created filename: " + filename + file_extension + " under " + file_path)
         else:
             print("Failed to create file  - exiting")
@@ -24,11 +24,11 @@ def create_zip(zip_file_name,full_file_name):
     handle.close()
     #time.sleep(20)  #Using sleep will give you the option to delete the file manually in order to check the if statment in case the file was not created
     if os.path.exists(zip_file_name) == True:
-        print(zip_file_name+" File exists")
-        logging.info("Created filename: " + zip_file_name + " under " + zip_file_path)
+        print("Zip file was created under : " + zip_file_name)
+        logging.info("Zip file was created under : " + zip_file_name)
     else:
         print("Failed to create file  - exiting")
-        logging.error("Could not create filename: " + zip_file_name + " under " + zip_file_path + " exiting")
+        logging.error("Could not create file umder : " zip_file_name + " exiting")
         exit()
 
                                              ####  variables   #####
@@ -57,11 +57,11 @@ else:
     logging.error("env VERSION is not defined - exiting")
     exit()
 
-# ## Create folder if are not exists
+# ## Create folder if are not exists - This is required when running the script as standalone
 #
-# #Path(file_path).mkdir(parents=True, exist_ok=True)
+# Path(file_path).mkdir(parents=True, exist_ok=True)
 # Path(zip_file_path).mkdir(parents=True, exist_ok=True)
-# #os.chmod(zip_file_path, 0o777)
+# os.chmod(zip_file_path, 0o777)
 
 ## Generate files
 
