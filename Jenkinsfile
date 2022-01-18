@@ -1,12 +1,12 @@
 pipeline {
     agent {
         dockerfile {
-              args '--privileged -v $WORKSPACE/zip:/zip -u emperor'
+              args '--privileged -v $WORKSPACE/zip:/zip -u root'
               reuseNode true
         }
     }
     stages {
-        stage ('first') {
+        stage ('Agent information') {
             steps {
                 sh '/tmp/get_info.sh'
             }
