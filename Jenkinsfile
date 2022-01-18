@@ -46,7 +46,7 @@ pipeline {
     					             spec: '''{
                                   "files": [
                                      {
-                                      "pattern": "$WORKSPACE/zip/*.zip",
+                                      "pattern": "${WORKSPACE}/zip/*.zip",
                                       "target":  "binary-storage/${FOLDER}"
                                     }
                                  ]
