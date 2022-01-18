@@ -48,7 +48,7 @@ pipeline {
     post {
         always {
             cleanWs()
-            step(emailext(attachLog: true, body: 'message', subject: 'hi', to: 'dudu.confirm@gmail.com'))
+            emailext(attachLog: true, body: 'message', subject: 'hi', to: 'dudu.confirm@gmail.com')
         }
     }
 }
