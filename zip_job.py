@@ -28,7 +28,7 @@ def create_zip(zip_file_name,full_file_name):
         logging.info("Zip file was created under : " + zip_file_name)
     else:
         print("Failed to create file  - exiting")
-        logging.error("Could not create file umder : " zip_file_name + " exiting")
+        logging.error("Could not create file under : " + zip_file_name + " exiting")
         exit()
 
                                              ####  variables   #####
