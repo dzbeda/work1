@@ -27,10 +27,12 @@ node {
          )
   }
   stage ('Send email') {
-        if (currentBuild.currentResult == 'SUCCESS')
-              emailext(attachLog: true, body: 'Pleae find attached log', subject: 'Job passed successfully', to: 'dudu.confirm@gmail.com;dudu.zbeda@gmail.com')
-        else
-              emailext(attachLog: true, body: 'Pleae find attached log', subject: 'Job failed to run', to: 'dudu.confirm@gmail.com;dudu.zbeda@gmail.com')
+         if (currentBuild.currentResult == 'SUCCESS')
+               emailext(attachLog: true, body: 'Pleae find attached log', subject: 'Job passed successfully', to: 'dudu.confirm@gmail.com;dudu.zbeda@gmail.com')
+         else
+               emailext(attachLog: true, body: 'Pleae find attached log', subject: 'Job failed to run', to: 'dudu.confirm@gmail.com;dudu.zbeda@gmail.com')
   }
-
+  stage ('Clean Workspace') {
+        cleanWs()
+  }
 }
