@@ -12,4 +12,7 @@ node {
         sh 'cat /tmp/output.log'
         }
   }
+  stage ('test') {
+  sh 'hostname'
+  }
 }
