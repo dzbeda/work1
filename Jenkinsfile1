@@ -12,7 +12,17 @@ node {
         sh 'cat /tmp/output.log'
         }
   }
-  stage ('test') {
-  sh 'hostname'
+  stage ('Publish') {
+        rtUpload (
+               serverId: 'jfrog1',
+               spec: '''{
+                      "files": [
+                         {
+                          "pattern": "$WORKSPACE/zip/*.zip",
+                          "target":  "binary-storage/"
+                        }
+                     ]
+                }'''
+         )
   }
 }
