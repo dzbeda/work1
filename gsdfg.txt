@@ -1,0 +1,187 @@
+
+sh 'echo ${currentBuild.result}'
+       sh 'echo ${currentBuild.currentResult}''
+
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+node {
+  checkout scm
+
+  def customImage = docker.build("my-image:${env.BUILD_ID}")
+  customImage.inside ('--privileged -v $WORKSPACE/zip:/zip -u root') {
+        sh 'echo "test"'
+        sh '/tmp/get_info.sh'
+        sh 'python3 /tmp/zip_job.py'
+        sh 'cat /tmp/output.log'
+        }
+}
+
+
+node {
+  checkout scm
+
+  def customImage = docker.build("my-image:${env.BUILD_ID}")
+  customImage.inside ('--privileged -v $WORKSPACE/zip:/zip -u root') {
+        stage ('test') {
+        sh '/tmp/get_info.sh'
+        sh 'python3 /tmp/zip_job.py'
+        sh 'cat /tmp/output.log'
+        }
+        stage ('build') {
+        sh 'hostname'
+        }
+  }
+}
+
+
+
+node {
+    def mvnHome
+    stage('Preparation') { // for display purposes
+        // Get some code from a GitHub repository
+        git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+        // Get the Maven tool.
+        // ** NOTE: This 'M3' Maven tool must be configured
+        // **       in the global configuration.
+        mvnHome = tool 'M3'
+    }
+    stage('Build') {
+        // Run the maven build
+        withEnv(["MVN_HOME=$mvnHome"]) {
+            if (isUnix()) {
+                sh '"$MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean package'
+            } else {
+                bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+            }
+        }
+    }
+    stage('Results') {
+        junit '**/target/surefire-reports/TEST-*.xml'
+        archiveArtifacts 'target/*.jar'
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+node {
+    checkout scm
+
+    def customImage = docker.build("my-image:${env.BUILD_ID}")
+    customImage.inside {
+        -v $WORKSPACE/zip:/zip
+        sh 'echo "test"'
+        sh '/tmp/get_info.sh'
+        sh 'python3 /tmp/zip_job.py'
+        sh 'cat /tmp/output.log'
+    }
+}
+
+
+
+node {
+    checkout scm
+
+    def customImage = docker.build("my-image:${env.BUILD_ID}")
+    customImage.withRun('-v $WORKSPACE/zip:/zip') {
+        sh 'echo "test"'
+        sh '/tmp/get_info.sh'
+        sh 'python3 /tmp/zip_job.py'
+        sh 'cat /tmp/output.log'
+    }
+}
+
+
+node {
+    checkout scm
+
+    def customImage = docker.build("my-image:${env.BUILD_ID}")
+    customImage.withRun('-v $WORKSPACE/zip:/zip') {
+        sh 'echo "test"'
+        sh '/tmp/get_info.sh'
+        sh 'python3 /tmp/zip_job.py'
+        sh 'cat /tmp/output.log'
+    }
+}
+
+
+
+node {
+    checkout scm
+
+    def customImage = docker.build("my-image:${env.BUILD_ID}")
+    def dudu = customImage.withRun('-v $WORKSPACE/zip:/zip')
+    dudu.inside {
+        sh 'echo "test"'
+        sh '/tmp/get_info.sh'
+        sh 'python3 /tmp/zip_job.py'
+        sh 'cat /tmp/output.log'
+    }
+}
+.
+
+
+
+stage('Test') {
+    docker.image('justinribeiro/chrome-headless').inside ("-p 9222:9222 --security-opt seccomp=$WORKSPACE/chrome.json") {
+        sh label:
+        'Running npm test',
+        script: '''
+        npm run test
+        '''
+      }
+    }
