@@ -1,4 +1,5 @@
 node {
+  checkout scm
   def customImage = docker.build("zip-job-docker:${env.BUILD_ID}")
   customImage.inside ('--privileged -v $WORKSPACE/zip:/zip -u root') {
         stage ('Agent information') {
