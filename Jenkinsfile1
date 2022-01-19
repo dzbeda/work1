@@ -1,5 +1,5 @@
 //node {
-  docker.dockerfile().inside{'--privileged -v $WORKSPACE/zip:/zip -u root'} {
+  docker.dockerfile(dir:Dockerfile).inside{'-v /tmp:/tmp'} {
 
       stage('Test') {
           echo "hello"
