@@ -3,7 +3,6 @@ sh 'echo ${currentBuild.result}'
        sh 'echo ${currentBuild.currentResult}''
 
 
-       
 
 
 
@@ -16,6 +15,10 @@ sh 'echo ${currentBuild.result}'
 
 
 
+       if (currentBuild.currentResult == 'SUCCESS')
+             println 'Hello'
+       else
+             println 'Hello'
 
 
 
@@ -23,11 +26,13 @@ sh 'echo ${currentBuild.result}'
 
 
 
+             emailext subject: 'Job passed successfully - scripted',
+                                     body: 'Pleae find attached log',
+                                     to: 'dudu.confirm@gmail.com'
 
 
 
-
-
+    cleanWs()
 
 
 
