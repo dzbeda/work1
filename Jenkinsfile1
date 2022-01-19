@@ -1,5 +1,5 @@
 //node {
-  docker.dockerfile(dir:Dockerfile).inside{'-v /tmp:/tmp'} {
+  docker.dockerfile(dir:Dockerfile).inside('-v /tmp:/tmp') {
 
       stage('Test') {
           echo "hello"
