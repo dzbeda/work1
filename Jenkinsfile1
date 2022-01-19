@@ -4,5 +4,8 @@ node {
       stage('Test') {
           echo "hello"
       }
+      stage('Test') {
+          /tmp/get_info.sh
+      }
    }
 }
