@@ -1,11 +1,14 @@
 node {
-  docker.dockerfile(dir:Dockerfile).inside('-v /tmp:/tmp') {
-
-      stage('Test') {
-          echo "hello"
-      }
-      stage('Test') {
-          /tmp/get_info.sh
-      }
-   }
+  def customImage = docker.build("my-image:${env.BUILD_ID}")
+  customImage.inside ('--privileged -v $WORKSPACE/zip:/zip -u root') {
+        stage ('Agent information') {
+        sh '/tmp/get_info.sh'
+        }
+        stage ('build') {
+        sh 'python3 /tmp/zip_job.py'
+        }
+        stage ('Show Log') {
+        sh 'cat /tmp/output.log'
+        }
+  }
 }
