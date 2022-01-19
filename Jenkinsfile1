@@ -3,6 +3,7 @@ node {
   customImage.inside ('--privileged -v $WORKSPACE/zip:/zip -u root') {
         stage ('Agent information') {
         sh '/tmp/get_info.sh'
+        sh 'hostname'
         }
         stage ('build') {
         sh 'python3 /tmp/zip_job.py'
