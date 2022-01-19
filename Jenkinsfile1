@@ -25,15 +25,8 @@ node {
                 }'''
          )
   }
-  post {
-       success {
-         emailext(attachLog: true, body: 'Pleaee find attached log', subject: 'Job passed successfully', to: 'dudu.confirm@gmail.com;dudu.zbeda@gmail.com')
-       }
-       failure  {
-         emailext(attachLog: true, body: 'Pleaee find attached log', subject: 'Job failed to run', to: 'dudu.confirm@gmail.com;dudu.zbeda@gmail.com')
-       }
-       always {
-          cleanWs()
-      }
+  stage ('fd') {
+      sh 'echo ${currentBuild.result}'
+      sh 'echo ${currentBuild.currentResult}'
   }
 }
